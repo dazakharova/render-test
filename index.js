@@ -4,6 +4,8 @@ const cors = require('cors')
 
 app.use(cors())
 
+app.use(express.static('dist'))
+
 app.use(express.json())
 
 let notes = [
@@ -24,23 +26,23 @@ let notes = [
     }
 ]
 
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-}
-
-app.use(unknownEndpoint)
+// const unknownEndpoint = (request, response) => {
+//   response.status(404).send({ error: 'unknown endpoint' })
+// }
+//
+// app.use(unknownEndpoint)
 
 app.get('/', (request, response) => {
     response.send('<h1>Hello World!</h1>')
 })
 
-app.use(unknownEndpoint)
+// app.use(unknownEndpoint)
 
 app.get('/api/notes', (request, response) => {
     response.json(notes)
 })
 
-app.use(unknownEndpoint)
+// app.use(unknownEndpoint)
 
 app.get('/api/notes/:id', (request, response) => {
     const id = Number(request.params.id)
@@ -52,7 +54,7 @@ app.get('/api/notes/:id', (request, response) => {
     }
 })
 
-app.use(unknownEndpoint)
+// app.use(unknownEndpoint)
 
 app.delete('/api/notes/:id', (request, response) => {
     const id = Number(request.params.id)
@@ -68,7 +70,7 @@ const generateId = () => {
     return maxId + 1
   }
 
-app.use(unknownEndpoint) 
+// app.use(unknownEndpoint)
   
 app.post('/api/notes', (request, response) => {
   const body = request.body
